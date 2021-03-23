@@ -6,6 +6,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:theme="@style/AppTheme.DarkAppBar"
+        android:elevation="4dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"/>
     <TextView
         android:layout_marginTop="20dp"
         android:gravity="center"
@@ -34,6 +41,7 @@
                 app:cardElevation="2dp"
                 android:layout_marginBottom="10dp">
                 <LinearLayout
+                    android:id="@+id/historyLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -61,6 +69,7 @@
                 app:cardElevation="2dp"
                 android:layout_marginBottom="10dp">
                 <LinearLayout
+                    android:id="@+id/geographyLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -91,6 +100,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp">
                 <LinearLayout
+                    android:id="@+id/spaceLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -118,6 +128,7 @@
                 app:cardElevation="2dp"
                 android:layout_marginBottom="10dp">
                 <LinearLayout
+                    android:id="@+id/engineerLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -148,6 +159,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp">
                         <LinearLayout
+                            android:id="@+id/programmingLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
@@ -175,6 +187,7 @@
                         app:cardElevation="2dp"
                         android:layout_marginBottom="10dp">
                         <LinearLayout
+                            android:id="@+id/businessLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
