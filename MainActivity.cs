@@ -24,6 +24,7 @@ namespace Quiz_App
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+<<<<<<< HEAD
 
             toolbar = (Android.Support.V7.Widget.Toolbar)FindViewById(Resource.Id.toolbar);
             //setup toolbar
@@ -33,6 +34,16 @@ namespace Quiz_App
             actionBar.SetHomeAsUpIndicator(Resource.Drawable.menuaction);
             actionBar.SetDisplayHomeAsUpEnabled(true);
             //View Setups
+=======
+            toolbar = (Android.Support.V7.Widget.Toolbar)FindViewById(Resource.Id.toolbar);
+            //setup toolbar
+            SetSupportActionBar(toolbar);
+            SupportActionBar.Title = "Topic";
+            Android.Support.V7.App.ActionBar actionBar = SupportActionBar;
+            actionBar.SetHomeAsUpIndicator(Resource.Drawable.menuaction);
+            actionBar.SetDisplayHomeAsUpEnabled(true);
+            //View Setting
+>>>>>>> 8b4658a7add3de3508f44f76704f3554a46b40e0
             historyLayout = (LinearLayout)FindViewById(Resource.Id.historyLayout);
             geographyLayout = (LinearLayout)FindViewById(Resource.Id.geographyLayout);
             spaceLayout = (LinearLayout)FindViewById(Resource.Id.spaceLayout);
@@ -47,6 +58,7 @@ namespace Quiz_App
             engineerLayout.Click += EngineerLayout_Click;
             programmingLayout.Click += ProgrammingLayout_Click;
             businessLayout.Click += BusinessLayout_Click;
+<<<<<<< HEAD
         }
 
         private void BusinessLayout_Click(object sender, System.EventArgs e)
@@ -88,6 +100,49 @@ namespace Quiz_App
         {
             Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
             intent.PutExtra("topic", "History");
+=======
+        }
+
+        private void BusinessLayout_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
+            intent.PutExtra("Topic", "Business");
+            StartActivity(intent);
+        }
+
+        private void ProgrammingLayout_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
+            intent.PutExtra("Topic", "Programming");
+            StartActivity(intent);
+        }
+
+        private void EngineerLayout_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
+            intent.PutExtra("Topic", "Engineer");
+            StartActivity(intent);
+        }
+
+        private void SpaceLayout_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
+            intent.PutExtra("Topic", "Space");
+            StartActivity(intent);
+        }
+
+        private void GeographyLayout_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
+            intent.PutExtra("Topic", "Geography");
+            StartActivity(intent);
+        }
+
+        private void HistoryLayout_Click(object sender, System.EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
+            intent.PutExtra("Topic", "History");
+>>>>>>> 8b4658a7add3de3508f44f76704f3554a46b40e0
             StartActivity(intent);
         }
     }
