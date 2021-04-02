@@ -35,7 +35,6 @@ namespace Quiz_App.Activities
             quizImageView = (ImageView)FindViewById(Resource.Id.quizeImage);
             startQuizButtion = (Button)FindViewById(Resource.Id.quizStartQuizButton);
             quizTopic = Intent.GetStringExtra("topic");
-<<<<<<< HEAD
             quizTopicTextView.Text = quizTopic;
             quizImageView.SetImageResource(GetImage(quizTopic));
             
@@ -68,9 +67,5 @@ namespace Quiz_App.Activities
             }
             return imageInt;
         }
-=======
-            
-        }
->>>>>>> 8b4658a7add3de3508f44f76704f3554a46b40e0
     }
 }
