@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Widget;
 using Android.Content;
 using Quiz_App.Activities;
+using Android.Views;
 
 namespace Quiz_App
 {
@@ -12,6 +13,9 @@ namespace Quiz_App
     public class MainActivity : AppCompatActivity
     {
         Android.Support.V7.Widget.Toolbar toolbar;
+        Android.Support.V4.Widget.DrawerLayout drawerLayout;
+        Android.Support.Design.Widget.NavigationView navigationView;
+        
         LinearLayout historyLayout;
         LinearLayout geographyLayout;
         LinearLayout spaceLayout;
@@ -26,6 +30,8 @@ namespace Quiz_App
             SetContentView(Resource.Layout.activity_main);
 
             toolbar = (Android.Support.V7.Widget.Toolbar)FindViewById(Resource.Id.toolbar);
+            drawerLayout = (Android.Support.V4.Widget.DrawerLayout)FindViewById(Resource.Id.drawerLayout);
+            navigationView = (Android.Support.Design.Widget.NavigationView)FindViewById(Resource.Id.navview);
             //setup toolbar
             SetSupportActionBar(toolbar);
             SupportActionBar.Title = "topic";
@@ -89,6 +95,18 @@ namespace Quiz_App
             Intent intent = new Intent(this, typeof(QuizDescriptionActivity));
             intent.PutExtra("topic", "History");
             StartActivity(intent);
+        }
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    drawerLayout.OpenDrawer((int) GravityFlags.Left);
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+            //return base.OnOptionsItemSelected(item);
         }
     }
 }
