@@ -35,13 +35,28 @@ namespace Quiz_App.Activities
             descriptionTextView = (TextView)FindViewById(Resource.Id.quizDescriptionText);
             quizImageView = (ImageView)FindViewById(Resource.Id.quizeImage);
             startQuizButtion = (Button)FindViewById(Resource.Id.quizStartQuizButton);
+         
+
             quizTopic = Intent.GetStringExtra("topic");
             quizTopicTextView.Text = quizTopic;
             quizImageView.SetImageResource(GetImage(quizTopic));
+
+
             QuizHelper quizHelper = new QuizHelper();
             descriptionTextView.Text = quizHelper.GetTopicDescription(quizTopic);
-            
+            startQuizButtion.Click += StartQuizButtion_Click;
+
+
         }
+
+        private void StartQuizButtion_Click(object sender, EventArgs e)
+        {
+            Intent Intent = new Intent(this, typeof(QuizActivity));
+            Intent.PutExtra("topic", quizTopic);
+            StartActivity(Intent);
+            Finish();
+        }
+
         int GetImage(string topic)
         {
             int imageInt = 0;
