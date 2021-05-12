@@ -50,6 +50,40 @@ namespace Quiz_App.Helpers
             return topicDescription;
             
         }
+        public List<Question> GetQuizQuestions(string topic)
+        {
+            List<Question> quizList = new List<Question>();
+            if(topic == "History")
+            {
+                InitializeHistory();
+                quizList = History;
+            }else if (topic == "Geography")
+            {
+                InitializeGeography();
+                quizList = Geography;
+            }
+            else if (topic == "Space")
+            {
+                InitializeSpace();
+                quizList = Space;
+            }
+            else if (topic == "Engineer")
+            {
+                InitializeEngineer();
+                quizList = Engineer;
+            }
+            else if (topic == "Programming")
+            {
+                InitializeProgramming();
+                quizList = Programming;
+            }
+            else if (topic == "Programming")
+            {
+                InitializeBusiness();
+                quizList = Business;
+            }
+            return quizList;
+        }
         void InitializeHistory()
         {
             History = new List<Question>();
@@ -90,11 +124,19 @@ namespace Quiz_App.Helpers
         }
         void InitializeProgramming()
         {
-            Programming.Add(new Question { QuizQuestion = "What year was the world’s first mobile phone handset released for sale?", Answer = "", OptionA = "1979", OptionB = "1983", OptionC = "1991", OptionD = "2001" });
-            Programming.Add(new Question { QuizQuestion = "On average how many SMS messages are sent via mobile phone per phone user every day?", Answer = "", OptionA = "0.5", OptionB = "4.0", OptionC = "2.5", OptionD = "5.5" });
-            Programming.Add(new Question { QuizQuestion = "Who designed the ‘first’ small computer for home use?", Answer = "", OptionA = "John Blankenbaker", OptionB = "Steve Wozniak", OptionC = "Chuck Peddle", OptionD = "Steve Leininger" });
-            Programming.Add(new Question { QuizQuestion = "When was the first email sent over the internet?", Answer = "", OptionA = "1961", OptionB = "1965", OptionC = "1971", OptionD = "1988" });
-            Programming.Add(new Question { QuizQuestion = "When was the internet created?", Answer = "", OptionA = "", OptionB = "", OptionC = "", OptionD = "" });
+            Programming.Add(new Question { QuizQuestion = "What year was the world’s first mobile phone handset released for sale?", Answer = "1983", OptionA = "1979", OptionB = "1983", OptionC = "1991", OptionD = "2001" });
+            Programming.Add(new Question { QuizQuestion = "On average how many SMS messages are sent via mobile phone per phone user every day?", Answer = "2.5", OptionA = "0.5", OptionB = "4.0", OptionC = "2.5", OptionD = "5.5" });
+            Programming.Add(new Question { QuizQuestion = "Who designed the ‘first’ small computer for home use?", Answer = "John Blankenbaker", OptionA = "John Blankenbaker", OptionB = "Steve Wozniak", OptionC = "Chuck Peddle", OptionD = "Steve Leininger" });
+            Programming.Add(new Question { QuizQuestion = "When was the first email sent over the internet?", Answer = "1971", OptionA = "1961", OptionB = "1965", OptionC = "1971", OptionD = "1988" });
+            Programming.Add(new Question { QuizQuestion = "When was the internet created?", Answer = "1968", OptionA = "1968", OptionB = "1972", OptionC = "1982", OptionD = "1995" });
+        }
+        void InitializeBusiness()
+        {
+            Business.Add(new Question { QuizQuestion = "What is the name of a person who owns part of a corporation?", Answer = "Shareholder", OptionA = "Stakeholder", OptionB = "Trust Agent", OptionC = "Shareholder", OptionD = "Chairman" });
+            Business.Add(new Question { QuizQuestion = "How many people can be involved in a partnership?", Answer = "2-20", OptionA = "2-10", OptionB = "2-15", OptionC = "2-5", OptionD = "2-20" });
+            Business.Add(new Question { QuizQuestion = "What are the owners of private and public limited companies called?", Answer = "Shareholders", OptionA = "Stakeholders", OptionB = "Managers", OptionC = "Board of directors", OptionD = "Shareholders" });
+            Business.Add(new Question { QuizQuestion = "Which of the following is a drawback for an entrepreneur setting up a business as a sole trader?", Answer = "Unlimited liability", OptionA = "Profit is shared", OptionB = "Financial accounts are kept private", OptionC = "Limited liability", OptionD = "Unlimited liability" });
+            Business.Add(new Question { QuizQuestion = "Which of the following types of business can advertise shares for sale to the general public?", Answer = "Public limited company", OptionA = "Sole trader", OptionB = "Partnership", OptionC = "Private limited company", OptionD = "Public limited company" });
         }
     }
 }
