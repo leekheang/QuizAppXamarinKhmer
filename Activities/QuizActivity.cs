@@ -5,6 +5,8 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Quiz_App.DataModels;
+using Quiz_App.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +20,19 @@ namespace Quiz_App.Activities
     {
         Android.Support.V7.Widget.Toolbar toolbar;
         RadioButton optionARadio, optionBRadio, optionCRadio, optionDRadio;
-        TextView optionATextView, optionBTextView, optionCTextView, optionDTextView, questionTextView, quizPositionTextView,timerConterTextView;
-        Button proccedQuizButtion;
+        TextView optionATextView, optionBTextView, optionCTextView, optionDTextView, questionTextView, quizPositionTextView, timerCounterTextView;
+        Button proccedQuizButton;
+        List<Question> quizQuestionList = new List<Question>();
+        QuizHelper quizHelper = new QuizHelper();
+
         string quizTopic;
+        int quizPosition;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.quiz_page);
-            quizTopic = Intent.GetStringExtra("Topic");
+            quizTopic = Intent.GetStringExtra("topic");
             toolbar = (Android.Support.V7.Widget.Toolbar)FindViewById(Resource.Id.quizToolbar);
             SetSupportActionBar(toolbar);
             SupportActionBar.Title = quizTopic + " Quiz";
@@ -34,7 +40,7 @@ namespace Quiz_App.Activities
             actionBar.SetHomeAsUpIndicator(Resource.Drawable.outline_arrowback);
             actionBar.SetDisplayHomeAsUpEnabled(true);
             ConnectViews();
-            
+            BeginQuiz();
         }
         void ConnectViews()
         {
@@ -50,7 +56,23 @@ namespace Quiz_App.Activities
 
             questionTextView = (TextView)FindViewById(Resource.Id.questionTextView);
             quizPositionTextView = (TextView)FindViewById(Resource.Id.quizPositionTextView);
-            timerConterTextView = (TextView)FindViewById(Resource.Id.timeCounterTextView);
+            timerCounterTextView = (TextView)FindViewById(Resource.Id.timeCounterTextView);
+
+            //buttion
+            proccedQuizButton = (Button)FindViewById(Resource.Id.processQuizButton);
+        }
+        void BeginQuiz()
+        {
+            quizPosition = 1;
+            quizQuestionList = quizHelper.GetQuizQuestions(quizTopic);
+            questionTextView.Text = quizQuestionList[0].QuizQuestion;
+
+            optionATextView.Text = quizQuestionList[0].OptionA;
+            optionBTextView.Text = quizQuestionList[0].OptionB;
+            optionCTextView.Text = quizQuestionList[0].OptionC;
+            optionDTextView.Text = quizQuestionList[0].OptionD;
+
+            quizPositionTextView.Text = "Question " + quizPosition.ToString() + "/" + quizQuestionList.Count();
         }
     }
 }
