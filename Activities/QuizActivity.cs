@@ -49,6 +49,11 @@ namespace Quiz_App.Activities
             optionCRadio = (RadioButton)FindViewById(Resource.Id.optionCRadio);
             optionDRadio = (RadioButton)FindViewById(Resource.Id.optionDRadio);
 
+            optionARadio.Click += OptionARadio_Click;
+            optionBRadio.Click += OptionBRadio_Click;
+            optionCRadio.Click += OptionCRadio_Click;
+            optionDRadio.Click += OptionDRadio_Click;
+
             optionATextView = (TextView)FindViewById(Resource.Id.optionATextView);
             optionBTextView = (TextView)FindViewById(Resource.Id.optionBTextView);
             optionCTextView = (TextView)FindViewById(Resource.Id.optionCTextView);
@@ -60,7 +65,94 @@ namespace Quiz_App.Activities
 
             //buttion
             proccedQuizButton = (Button)FindViewById(Resource.Id.processQuizButton);
+            proccedQuizButton.Click += ProccedQuizButton_Click;
         }
+
+        private void ProccedQuizButton_Click(object sender, EventArgs e)
+        {
+            if(!optionARadio.Checked && !optionBRadio.Checked && !optionCRadio.Checked && !optionDRadio.Checked)
+            {
+                Toast.MakeText(this, "Please choose your answer!!", ToastLength.Short).Show();
+            }
+            else if (optionARadio.Checked)
+            {
+                if(optionATextView.Text == quizQuestionList[quizPosition - 1].Answer)
+                {
+                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                }
+            }
+            else if (optionBRadio.Checked)
+            {
+                if (optionBTextView.Text == quizQuestionList[quizPosition - 1].Answer)
+                {
+                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                }
+            }
+            else if (optionCRadio.Checked)
+            {
+                if (optionCTextView.Text == quizQuestionList[quizPosition - 1].Answer)
+                {
+                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                }
+            }
+            else if (optionDRadio.Checked)
+            {
+                if (optionDTextView.Text == quizQuestionList[quizPosition - 1].Answer)
+                {
+                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                }
+            }
+        }
+
+        private void OptionDRadio_Click(object sender, EventArgs e)
+        {
+            ClearOptionsSelected();
+            optionDRadio.Checked = true;
+            
+        }
+
+        private void OptionCRadio_Click(object sender, EventArgs e)
+        {
+            ClearOptionsSelected();
+            optionCRadio.Checked = true;
+            
+        }
+
+        private void OptionBRadio_Click(object sender, EventArgs e)
+        {
+            ClearOptionsSelected();
+            optionBRadio.Checked = true;
+        }
+
+        private void OptionARadio_Click(object sender, EventArgs e)
+        {
+            ClearOptionsSelected();
+            optionARadio.Checked = true;
+        }
+        void ClearOptionsSelected()
+        {
+            optionARadio.Checked = false;
+            optionBRadio.Checked = false;
+            optionCRadio.Checked = false;
+            optionDRadio.Checked = false;
+        }
+
         void BeginQuiz()
         {
             quizPosition = 1;
