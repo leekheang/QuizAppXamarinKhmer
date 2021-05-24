@@ -6,6 +6,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Quiz_App.DataModels;
+using Quiz_App.Fragment;
 using Quiz_App.Helpers;
 using System;
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ namespace Quiz_App.Activities
             {
                 if(optionATextView.Text == quizQuestionList[quizPosition - 1].Answer)
                 {
-                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                    CorrectAnswer();
                 }
                 else
                 {
@@ -89,7 +90,7 @@ namespace Quiz_App.Activities
             {
                 if (optionBTextView.Text == quizQuestionList[quizPosition - 1].Answer)
                 {
-                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                    CorrectAnswer();
                 }
                 else
                 {
@@ -100,7 +101,7 @@ namespace Quiz_App.Activities
             {
                 if (optionCTextView.Text == quizQuestionList[quizPosition - 1].Answer)
                 {
-                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                    CorrectAnswer();
                 }
                 else
                 {
@@ -111,7 +112,7 @@ namespace Quiz_App.Activities
             {
                 if (optionDTextView.Text == quizQuestionList[quizPosition - 1].Answer)
                 {
-                    Toast.MakeText(this, "The answer is correct", ToastLength.Short).Show();
+                    CorrectAnswer();
                 }
                 else
                 {
@@ -165,6 +166,19 @@ namespace Quiz_App.Activities
             optionDTextView.Text = quizQuestionList[0].OptionD;
 
             quizPositionTextView.Text = "Question " + quizPosition.ToString() + "/" + quizQuestionList.Count();
+        }
+        void CorrectAnswer()
+        {
+            CorrectFragment correctFragment = new CorrectFragment();
+            var trans = SupportFragmentManager.BeginTransaction();
+            correctFragment.Cancelable = false;
+            correctFragment.Show(trans, "Correct");
+            correctFragment.NextQuestion += CorrectFragment_NextQuestion;
+        }
+
+        private void CorrectFragment_NextQuestion(object sender, EventArgs e)
+        {
+            
         }
     }
 }
