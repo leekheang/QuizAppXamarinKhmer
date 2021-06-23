@@ -12,29 +12,36 @@ using System.Text;
 
 namespace Quiz_App.Fragment
 {
-    public class CorrectFragment : Android.Support.V4.App.DialogFragment
+    public class IncorrectFragment : Android.Support.V4.App.DialogFragment
+        
     {
-
-        Button correctButton;
-        public event EventHandler NextQuestion; 
+        string correctAnswer;
+        TextView correctAnswerTextView;
+        Button nextButton;
+        public event EventHandler NextQuestion;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
         }
+        public IncorrectFragment(string answer)
+        {
+            correctAnswer = answer;
+        }
+    
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            View view = inflater.Inflate(Resource.Layout.wrong, container, false); 
+            correctAnswerTextView = (TextView)view.FindViewById(Resource.Id.correctAnswerTextView);
 
-            View view = inflater.Inflate(Resource.Layout.correct, container, false);
-            correctButton = (Button)view.FindViewById(Resource.Id.correctButton);
-            correctButton.Click += CorrectButton_Click;
+            nextButton = (Button)view.FindViewById(Resource.Id.nextButton);
+            nextButton.Click += NextButton_Click;
             return view;
-
         }
 
-        private void CorrectButton_Click(object sender, EventArgs e)
+        private void NextButton_Click(object sender, EventArgs e)
         {
             this.Dismiss();
             NextQuestion?.Invoke(this, new EventArgs());

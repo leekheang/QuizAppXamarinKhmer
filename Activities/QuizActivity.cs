@@ -73,7 +73,7 @@ namespace Quiz_App.Activities
         {
             if(!optionARadio.Checked && !optionBRadio.Checked && !optionCRadio.Checked && !optionDRadio.Checked)
             {
-                Toast.MakeText(this, "Please choose your answer!!", ToastLength.Short).Show();
+                IncorrectAnswer();
             }
             else if (optionARadio.Checked)
             {
@@ -83,7 +83,7 @@ namespace Quiz_App.Activities
                 }
                 else
                 {
-                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                    IncorrectAnswer();
                 }
             }
             else if (optionBRadio.Checked)
@@ -94,7 +94,7 @@ namespace Quiz_App.Activities
                 }
                 else
                 {
-                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                    IncorrectAnswer();
                 }
             }
             else if (optionCRadio.Checked)
@@ -105,7 +105,7 @@ namespace Quiz_App.Activities
                 }
                 else
                 {
-                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                    IncorrectAnswer();
                 }
             }
             else if (optionDRadio.Checked)
@@ -116,7 +116,7 @@ namespace Quiz_App.Activities
                 }
                 else
                 {
-                    Toast.MakeText(this, "Incorrect answer", ToastLength.Short).Show();
+                    IncorrectAnswer();
                 }
             }
         }
@@ -175,7 +175,16 @@ namespace Quiz_App.Activities
             correctFragment.Show(trans, "Correct");
             correctFragment.NextQuestion += CorrectFragment_NextQuestion;
         }
+        void IncorrectAnswer()
+        {
+            IncorrectFragment incorrectFragment = new IncorrectFragment(quizQuestionList[quizPosition - 1].Answer);
+            var trans = SupportFragmentManager.BeginTransaction(); 
+            incorrectFragment.Cancelable = false;
+            incorrectFragment.Show(trans, "Incorrect");
+            incorrectFragment.NextQuestion += CorrectFragment_NextQuestion;
+        }
 
+      
         private void CorrectFragment_NextQuestion(object sender, EventArgs e)
         {
             
