@@ -187,7 +187,21 @@ namespace Quiz_App.Activities
       
         private void CorrectFragment_NextQuestion(object sender, EventArgs e)
         {
-            
+            quizPosition++;
+            if(quizPosition > quizQuestionList.Count)
+            {
+                Toast.MakeText(this,"No more question", ToastLength.Short).Show();
+                return;
+            }   
+            int idx = quizPosition - 1;
+            ClearOptionsSelected();
+            questionTextView.Text = quizQuestionList[idx].QuizQuestion;
+            optionATextView.Text = quizQuestionList[idx].OptionA;
+            optionBTextView.Text = quizQuestionList[idx].OptionB;
+            optionCTextView.Text = quizQuestionList[idx].OptionC;
+            optionDTextView.Text = quizQuestionList[idx].OptionD;
+
+            quizPositionTextView.Text = "Question" + quizPosition.ToString() + "/" + quizQuestionList.Count.ToString();
         }
     }
 }
