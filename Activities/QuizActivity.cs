@@ -28,6 +28,7 @@ namespace Quiz_App.Activities
 
         string quizTopic;
         int quizPosition;
+        double correctAnswerCount = 0;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -79,6 +80,7 @@ namespace Quiz_App.Activities
             {
                 if(optionATextView.Text == quizQuestionList[quizPosition - 1].Answer)
                 {
+                    correctAnswerCount++;
                     CorrectAnswer();
                 }
                 else
@@ -89,7 +91,9 @@ namespace Quiz_App.Activities
             else if (optionBRadio.Checked)
             {
                 if (optionBTextView.Text == quizQuestionList[quizPosition - 1].Answer)
+
                 {
+                    correctAnswerCount++;
                     CorrectAnswer();
                 }
                 else
@@ -101,6 +105,7 @@ namespace Quiz_App.Activities
             {
                 if (optionCTextView.Text == quizQuestionList[quizPosition - 1].Answer)
                 {
+                    correctAnswerCount++;
                     CorrectAnswer();
                 }
                 else
@@ -112,6 +117,7 @@ namespace Quiz_App.Activities
             {
                 if (optionDTextView.Text == quizQuestionList[quizPosition - 1].Answer)
                 {
+                    correctAnswerCount++;
                     CorrectAnswer();
                 }
                 else
@@ -190,7 +196,7 @@ namespace Quiz_App.Activities
             quizPosition++;
             if(quizPosition > quizQuestionList.Count)
             {
-                Toast.MakeText(this,"No more question", ToastLength.Short).Show();
+                CompleteQuiz();
                 return;
             }   
             int idx = quizPosition - 1;
@@ -202,6 +208,38 @@ namespace Quiz_App.Activities
             optionDTextView.Text = quizQuestionList[idx].OptionD;
 
             quizPositionTextView.Text = "Question" + quizPosition.ToString() + "/" + quizQuestionList.Count.ToString();
+        }
+        void CompleteQuiz()
+        {
+            string score = correctAnswerCount.ToString() + "/" + quizQuestionList.Count.ToString();
+            double percentage = (correctAnswerCount / double.Parse(quizQuestionList.Count.ToString())) * 100;
+            string remarks = "";
+            string image = "";
+            if(percentage > 50 && percentage < 70)
+            {
+                remarks = "Very Good result, you\nReally tried";
+            }
+            else if(percentage >= 70)
+            {
+                remarks = "Very Outstanding result, you\nKill tried";
+            }
+            else if (percentage == 50)
+            {
+                remarks = "You really made it\nAverage result";
+            }
+            else if (percentage < 50)
+            {
+                remarks = "So sad you didn't make it, \nBut you can try again";
+                image = "failed";
+            }
+            CompletedFragment completedFragment = new CompletedFragment(remarks , score , image);
+            completedFragment.Cancelable = false;
+            var trans = SupportFragmentManager.BeginTransaction();
+            completedFragment.Show(trans, "Complete");
+            completedFragment.GoHome += (sender, e) =>
+            {
+                this.Finish();
+            };
         }
     }
 }

@@ -33,8 +33,9 @@ namespace Quiz_App.Fragment
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.wrong, container, false); 
+            View view = inflater.Inflate(Resource.Layout.wrong, container, false);
             correctAnswerTextView = (TextView)view.FindViewById(Resource.Id.correctAnswerTextView);
+            correctAnswerTextView.Text = correctAnswer;
 
             nextButton = (Button)view.FindViewById(Resource.Id.nextButton);
             nextButton.Click += NextButton_Click;
