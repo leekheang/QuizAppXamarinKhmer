@@ -7716,7 +7716,7 @@ namespace Quiz_App
 			public const int time = 2131231204;
 			
 			// aapt resource value: 0x7F0801E5
-			public const int timeCounterTextView = 2131231205;
+			public const int timerCounterTextView = 2131231205;
 			
 			// aapt resource value: 0x7F0801E6
 			public const int title = 2131231206;

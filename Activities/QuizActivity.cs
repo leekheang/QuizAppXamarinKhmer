@@ -29,6 +29,10 @@ namespace Quiz_App.Activities
         string quizTopic;
         int quizPosition;
         double correctAnswerCount = 0;
+        int timerCounter = 0;
+        DateTime dateTime;
+
+        System.Timers.Timer countDown = new System.Timers.Timer();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -43,7 +47,31 @@ namespace Quiz_App.Activities
             actionBar.SetDisplayHomeAsUpEnabled(true);
             ConnectViews();
             BeginQuiz();
+            countDown.Interval = 1000;
+            countDown.Elapsed += CountDown_Elapsed;
         }
+
+        private void CountDown_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+
+        {
+            timerCounter++;
+
+            DateTime dt = new DateTime();
+            dt = dateTime.AddSeconds(-1);
+            var dateDifference = dateTime.Subtract(dt);
+            dateTime = dateTime - dateDifference;
+            RunOnUiThread(() =>
+            {
+                timerCounterTextView.Text = dateTime.ToString("mm:ss");
+            });
+
+            if(timerCounter == 120)
+            {
+                countDown.Enabled = false;
+                CompleteQuiz();
+            }
+        }
+
         void ConnectViews()
         {
             optionARadio = (RadioButton)FindViewById(Resource.Id.optionARadio);
@@ -63,7 +91,7 @@ namespace Quiz_App.Activities
 
             questionTextView = (TextView)FindViewById(Resource.Id.questionTextView);
             quizPositionTextView = (TextView)FindViewById(Resource.Id.quizPositionTextView);
-            timerCounterTextView = (TextView)FindViewById(Resource.Id.timeCounterTextView);
+            timerCounterTextView = (TextView)FindViewById(Resource.Id.timerCounterTextView);
 
             //buttion
             proccedQuizButton = (Button)FindViewById(Resource.Id.processQuizButton);
@@ -172,6 +200,10 @@ namespace Quiz_App.Activities
             optionDTextView.Text = quizQuestionList[0].OptionD;
 
             quizPositionTextView.Text = "Question " + quizPosition.ToString() + "/" + quizQuestionList.Count();
+            dateTime = new DateTime();
+            dateTime = dateTime.AddMinutes(2);
+            timerCounterTextView.Text = dateTime.ToString("mm:ss");  
+            countDown.Enabled = true;
         }
         void CorrectAnswer()
         {
@@ -211,6 +243,9 @@ namespace Quiz_App.Activities
         }
         void CompleteQuiz()
         {
+            timerCounterTextView.Text = dateTime.ToString("00:00");
+            countDown.Enabled = true;
+
             string score = correctAnswerCount.ToString() + "/" + quizQuestionList.Count.ToString();
             double percentage = (correctAnswerCount / double.Parse(quizQuestionList.Count.ToString())) * 100;
             string remarks = "";
