@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
@@ -102,7 +103,7 @@ namespace Quiz_App.Activities
         {
             if(!optionARadio.Checked && !optionBRadio.Checked && !optionCRadio.Checked && !optionDRadio.Checked)
             {
-                IncorrectAnswer();
+                Snackbar.Make((View)sender, "Please choose your answer !!", Snackbar.LengthShort).Show();          
             }
             else if (optionARadio.Checked)
             {
